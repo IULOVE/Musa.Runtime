@@ -97,10 +97,10 @@ Return Value:
 
 __forceinline
 void
-__except_validate_jump_buffer_common(
+__except_validate_jump_buffer_common (
     _In_reads_(_JBLEN) jmp_buf JumpBuffer,
-    _In_ PVOID(*ExceptGetJbSpRoutine)(jmp_buf)
-)
+    _In_ PVOID (*ExceptGetJbSpRoutine)(jmp_buf)
+    )
 
 /*++
 
@@ -202,7 +202,7 @@ Return Value:
     // return.
     //
     if (_guard_icall_checks_enforced()) {
-        IoGetStackLimits((PULONG_PTR)&StackBase, (PULONG_PTR)&StackLimit);
+        IoGetStackLimits((PULONG_PTR)&StackLimit, (PULONG_PTR)&StackBase);
 
         StackPointer = (PVOID)CONTEXT_TO_STACK_POINTER(ContextRecord);
         if ((StackPointer < StackLimit) ||
@@ -251,7 +251,7 @@ Return Value:
     //
 
     if (_guard_icall_checks_enforced()) {
-        IoGetStackLimits((PULONG_PTR)&StackBase, (PULONG_PTR)&StackLimit);
+        IoGetStackLimits((PULONG_PTR)&StackLimit, (PULONG_PTR)&StackBase);
 
         StackPointer = ExceptGetJbSpRoutine(JumpBuffer);
         if ((StackPointer < StackLimit) ||
